@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quiz 3 Laravel Vue</title>
+    <style>
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        font-family: sans-serif;
+        height: 100%;
+        margin: 0;
+        background: black;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h2 {
+        color: blue;
+        text-align: center;
+        font-size: 40px;
+        margin: 20px;
+      }
+      main {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 420px;
+        max-width: 768px;
+        margin: 0 auto;
+        font-family: monospace, sans-serif;
+        font-size: 22px;
+      }
+      main label {
+        display: block;
+      }
+      main input[type="range"] {
+        display: block;
+        margin-bottom: 10px;
+        width: 200px;
+      }
+      section.settings {
+        width: 50%;
+        z-index: 2;
+      }
+      .box-container {
+        padding: 50px;
+        border: 1px solid blue;
+      }
+      .box {
+        width: 150px;
+        height: 150px;
+        background: blue;
+      }
+
+      button {
+        color: white;
+        display: inline-block;
+        font-size: 20px;
+        padding: 10px;
+        outline: none;
+        border: none;
+        margin-right: 10px;
+      }
+
+      label {
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <h2>Quiz 3 Laravel Vue</h2>
+      <main>
+        <section class="settings">
+          <div class="settings-container">
+            <label>perspective: <span v-text="perspective"></span>px; </label>
+            <input type="range" min="0" max="999" v-model="perspective" />
+
+            <label>rotateX: <span v-text="rotateX"></span>deg; </label>
+            <input type="range" min="-180" max="180" v-model="rotateX" />
+
+            <label>rotateY: <span v-text="rotateY"></span>deg; </label>
+            <input type="range" min="-180" max="180" v-model="rotateY" />
+
+            <label>rotateZ: <span v-text="rotateZ"></span>deg; </label>
+            <input type="range" min="-180" max="180" v-model="rotateZ" />
+          </div>
+        </section>
+        <section class="output">
+          <div class="box-container" v-bind:style="perspectiveStyle">
+            <div class="box" v-bind:style="rotateStyle"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            perspective: 100,
+            rotateX: 0,
+            rotateY: 0,
+            rotateZ: 0,
+          };
+        },
+        computed: {
+          perspectiveStyle() {
+            return { perspective: this.perspective + "px" };
+          },
+          rotateStyle() {
+            return {
+              transform: "rotateX(" + this.rotateX + "deg) rotateY(" + this.rotateY + "deg) rotateZ(" + this.rotateZ + "deg)",
+            };
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
